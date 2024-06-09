@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button (click)="abrirMenu()"><ion-icon name="menu"></ion-icon></ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-buttons slot="end" color="tertiary">
+      <ion-button [routerLink]="['/cuenta']">
+        <ion-icon slot="icon-only" ios="id-card-outline" md="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu contentId="main-content">
+  
+  <ion-content class="ion-padding">
+    
+      <ion-list>
+        <ion-item (click)="toGo('inicio')">
+          <ion-icon aria-hidden="true" name="home" slot="start"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-item>
+        <ion-item (click)="toGo('tienda')">
+          <ion-icon aria-hidden="true" name="pricetags" slot="start"></ion-icon>
+          <ion-label>Tienda</ion-label>
+        </ion-item>
+        <ion-item (click)="toGo('carrito')">
+          <ion-icon aria-hidden="true" name="cart" slot="start"></ion-icon>
+          <ion-label>Carrito</ion-label>
+          <ion-badge slot="end" color="primary">{{carritoNumber}}</ion-badge>
+        </ion-item>
+        <ion-item (click)="toGo('guardados')">
+          <ion-icon aria-hidden="true" name="receipt" slot="start"></ion-icon>
+          <ion-label>Mis pedidos</ion-label>
+        </ion-item>
+      </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content [fullscreen]="true" id="main-content">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-skeleton-text [animated]="true" style="width: 70%; height: 35px; margin-left: 10px;" *ngIf="!carga"></ion-skeleton-text>
+      <ion-title size="large" *ngIf="carga">¡Hola, {{datos[0]}}!</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div *ngIf="esAndroid()">
+    <ion-skeleton-text [animated]="true" style="width: 70%; height: 35px; margin-top: 20px; margin-left: 1rem;" *ngIf="!carga"></ion-skeleton-text>
+    <h1 size="large" style="margin: 1rem;" *ngIf="carga">¡Hola, {{datos[0]}}!</h1>
+  </div>
+</ion-content>
